@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
+import DocumentOverview from "./documents/DocumentOverview";
 
 export default function PersonDetail(props)
 {
@@ -15,6 +16,7 @@ export default function PersonDetail(props)
             axios.get("/people/"+id).then(
                 (response)=>
                 {
+                    console.log(response.data)
                     setPerson(response.data);
                 }
             )  
@@ -22,7 +24,48 @@ export default function PersonDetail(props)
         []
     );
 
-    function save()
+    function addDocument(doc)
+    {
+        doc.person_id = id;
+        axios.post("/documents",doc).then(
+            (response)=>
+            {
+                let clone = {...person};
+                clone.documents.push(response);
+                setPerson(clone);
+            }
+        );
+    }
+
+    function deleteDocument(doc)
+    {
+        axios.delete("/documents/"+doc.id).then(
+
+            ()=>
+            {
+                let clone = {...person};
+                let pos = clone.documents.findIndex(d => d.id==doc.id);
+                clone.documents.splice(pos,1);
+                setPerson(clone);
+            }
+        )
+    }
+
+    function updateDocument(doc)
+    {
+        axios.put("/documents/"+doc.id).then(
+
+            (response)=>
+            {
+                let clone = {...person};
+                let pos = clone.documents.findIndex(d => d.id==doc.id);
+                clone.documents[pos] = response;
+                setPerson(clone);
+            }
+        )
+    }
+
+    function savePerson()
     {
         axios.put("/people/"+id,person).then(()=>setUpdating(false));
     }
@@ -60,7 +103,7 @@ export default function PersonDetail(props)
             </div>
             <div className="p-3">
                 <button class="btn btn-secondary"  onClick={()=>setUpdating(false)} >Cancel</button>
-                <button class="btn btn-success float-end"    onClick={save} >Save</button>
+                <button class="btn btn-success float-end"    onClick={savePerson} >Save</button>
             </div>
         </div>
     );
@@ -76,71 +119,9 @@ export default function PersonDetail(props)
                     {updating &&updatableCard}
                 </div>
                 <div className="col-8 bg-light">
-                    DATI DOCUMENTI
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-                    <p>A</p>
-
+                   <div className="row">
+                        {person.documents!=null &&person.documents.map(d=> <DocumentOverview key={d.id} doc={d} delete={deleteDocument}/>)}
+                   </div>
                 </div>
 
 
