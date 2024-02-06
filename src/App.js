@@ -3,6 +3,7 @@ import Navbar from "./components/navbar/Navbar";
 import 'bootstrap/dist/css/bootstrap.css';
 import Homepage from "./components/homepage/Homepage";
 import AllPeople from "./components/people/AllPeople";
+import PersonDetail from "./components/people/PersonDetail";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       <Routes>
         <Route index element={<Homepage />} />
         <Route path="allpeople" element={<AllPeople />} />
+        <Route path="persondetail/:id" element={<PersonDetail />}/>
+        {/* in spring facciamo con url/{id} */}
+        
 
       </Routes>
     </BrowserRouter>

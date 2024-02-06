@@ -15,8 +15,11 @@
 //         </div>
 //         </>
 //     );
+
+import { Link } from "react-router-dom";
+
 // }
-export default function PersonOverview({name,surname,age})
+export default function PersonOverview({id,name,surname,age})
 {
 
     return(
@@ -25,7 +28,8 @@ export default function PersonOverview({name,surname,age})
             <div class="card" style={{"width":"18rem"}}>
                 <div class="card-body">
                     <h5 class="card-title">{name} {surname}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{age}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Age: {age}</h6>
+                    <Link class="card-link" to={"/persondetail/"+id}>DETTAGLIO</Link>
                     {/* <a href="#" class="card-link">Card link</a>
                     <a href="#" class="card-link">Another link</a> */}
                 </div>
