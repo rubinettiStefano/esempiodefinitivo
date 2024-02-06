@@ -58,6 +58,7 @@ export default function PersonDetail(props)
 
     function updateDocument(doc)
     {
+        doc.person_id = person.id;
         axios.put("/documents/"+doc.id,doc).then(
 
             (response)=>
