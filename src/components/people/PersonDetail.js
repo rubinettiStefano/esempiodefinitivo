@@ -9,6 +9,7 @@ export default function PersonDetail(props)
     let {id} = useParams();//vado a prendere dall'url la path variable id
     const [person,setPerson] = useState({});
     const [updating,setUpdating] = useState(false);
+    const [updatableMap, setUpdatableMap] = useState({});
 
     useEffect(
         ()=>
@@ -16,8 +17,12 @@ export default function PersonDetail(props)
             axios.get("/people/"+id).then(
                 (response)=>
                 {
-                    console.log(response.data)
                     setPerson(response.data);
+                    let mappa = {};
+                    for(let doc of response.data.documents)
+                        mappa[doc.id] = false;
+
+                    setUpdatableMap(mappa);
                 }
             )  
         },
@@ -53,16 +58,24 @@ export default function PersonDetail(props)
 
     function updateDocument(doc)
     {
-        axios.put("/documents/"+doc.id).then(
+        axios.put("/documents/"+doc.id,doc).then(
 
             (response)=>
             {
                 let clone = {...person};
                 let pos = clone.documents.findIndex(d => d.id==doc.id);
-                clone.documents[pos] = response;
+                clone.documents[pos] = response.data;
                 setPerson(clone);
+                setUpdatable(response.data,false);
             }
         )
+    }
+
+    function setUpdatable(doc,value)
+    {
+        let clone = {...updatableMap};
+        clone[doc.id]=value;
+        setUpdatableMap(clone);
     }
 
     function savePerson()
@@ -120,7 +133,7 @@ export default function PersonDetail(props)
                 </div>
                 <div className="col-8 bg-light">
                    <div className="row">
-                        {person.documents!=null &&person.documents.map(d=> <DocumentOverview key={d.id} doc={d} delete={deleteDocument}/>)}
+                        {person.documents!=null &&person.documents.map(d=> <DocumentOverview update={updateDocument} setUpdatable={setUpdatable} isUpdating={updatableMap[d.id]} key={d.id} doc={d} delete={deleteDocument}/>)}
                    </div>
                 </div>
 
