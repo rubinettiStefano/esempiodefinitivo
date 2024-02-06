@@ -33,7 +33,7 @@ export default function PersonDetail(props)
     }
 
     let readOnlyCard = (
-        <div class="card">
+        <div class="card sticky-top" style={{top:"100px"}}>
             <div class="card-body">
                 <h5 class="card-title">{person.name} {person.surname}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Age: {person.age}</h6>
@@ -43,7 +43,7 @@ export default function PersonDetail(props)
     );
 
     let updatableCard = (
-        <div class="card">
+        <div class="card sticky-top" style={{top:"100px"}}>
             <div class="card-body">
             <div class="input-group mb-3 card-title">
                 <span class="input-group-text" >Name</span>
@@ -77,6 +77,70 @@ export default function PersonDetail(props)
                 </div>
                 <div className="col-8 bg-light">
                     DATI DOCUMENTI
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+                    <p>A</p>
+
                 </div>
 
 
