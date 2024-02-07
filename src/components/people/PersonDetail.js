@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import DocumentOverview from "./documents/DocumentOverview";
+import NewDocumentForm from "./documents/NewDocumentForm";
 
 export default function PersonDetail(props)
 {
@@ -36,7 +37,7 @@ export default function PersonDetail(props)
             (response)=>
             {
                 let clone = {...person};
-                clone.documents.push(response);
+                clone.documents.push(response.data);
                 setPerson(clone);
             }
         );
@@ -128,11 +129,13 @@ export default function PersonDetail(props)
     return(
         <>
             <div className="row">
-                <div className="col-4">
+                <div className="col-4 p-4">
                     {!updating &&readOnlyCard}
                     {updating &&updatableCard}
+                    <br/><br/>
+                    <NewDocumentForm insert={addDocument} />
                 </div>
-                <div className="col-8 bg-light">
+                <div className="col-8 bg-light pt-4">
                    <div className="row">
                         {person.documents!=null &&person.documents.map(d=> <DocumentOverview update={updateDocument} setUpdatable={setUpdatable} isUpdating={updatableMap[d.id]} key={d.id} doc={d} delete={deleteDocument}/>)}
                    </div>

@@ -13,15 +13,15 @@ export default function DocumentOverview(props)
     if(!props.isUpdating)
         return(
             <>
-            <div className="col-4 d-flex justify-content-center text-center">
+            <div className="col-4 d-flex justify-content-center text-center mb-4">
                 <div class="card" style={{"width":"18rem"}}>
                     <div class="card-body">
                         <h5 class="card-title">  {props.doc.type} #{props.doc.number}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Issued on: {props.doc.release_date}</h6>
                         <h6 class="card-subtitle mb-2 text-muted">Expire on: {props.doc.expiring_date}</h6>
                         <div>
-                            <button onClick={()=>props.delete(props.doc)}>DELETE</button>
-                            <button onClick={()=>props.setUpdatable(props.doc,true)}>MODIFY</button>
+                            <button  className="btn btn-danger me-4" onClick={()=>props.delete(props.doc)}>DELETE</button>
+                            <button  className="btn btn-warning " onClick={()=>props.setUpdatable(props.doc,true)}>MODIFY</button>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@ export default function DocumentOverview(props)
     else
         return(
             <>
-            <div className="col-4 d-flex justify-content-center text-center">
+            <div className="col-4 d-flex justify-content-center text-center mb-4">
                 <div class="card" style={{"width":"18rem"}}>
                     <div class="card-body">
                         <div class="input-group mb-3 card-title">
@@ -52,8 +52,8 @@ export default function DocumentOverview(props)
                             <input type="date" class="form-control" name="expiring_date" value={tempDoc.expiring_date} onChange={synchronize} />
                         </div>
                         <div>
-                            <button onClick={()=>props.setUpdatable(props.doc,false)}>CANCEL</button>
-                            <button onClick={()=>props.update(tempDoc)}>SAVE</button>
+                            <button className="btn btn-danger me-4" onClick={()=>props.setUpdatable(props.doc,false)}>CANCEL</button>
+                            <button className="btn btn-success " onClick={()=>props.update(tempDoc)}>SAVE</button>
                         </div>
                     </div>
                 </div>
