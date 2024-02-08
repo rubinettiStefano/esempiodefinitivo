@@ -4,6 +4,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Homepage from "./components/homepage/Homepage";
 import AllPeople from "./components/people/AllPeople";
 import PersonDetail from "./components/people/PersonDetail";
+import { atom } from "jotai";
+
+
+//Variabile di contesto globale
+//è STATE dell'intera applicazione
+export const valoreGlobale = atom("ciao sono il valore globale");
 
 function App() {
   return (

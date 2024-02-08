@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import DocumentOverview from "./documents/DocumentOverview";
 import NewDocumentForm from "./documents/NewDocumentForm";
+import { useAtom, useAtomValue } from "jotai";
+import { valoreGlobale } from "../../App";
 
 export default function PersonDetail(props)
 {
@@ -12,6 +14,9 @@ export default function PersonDetail(props)
     const [updating,setUpdating] = useState(false);
     const [updatableMap, setUpdatableMap] = useState({});
 
+    const [varGlob,setVarGlob] = useAtom(valoreGlobale);//si collega alla variabile globale
+
+    const varGlobSolaLettura = useAtomValue(valoreGlobale);
     useEffect(
         ()=>
         {
@@ -124,7 +129,10 @@ export default function PersonDetail(props)
     );
 
 
-
+    function modifyVarGlob(e)
+    {
+        setVarGlob(e.target.value);
+    }
 
     return(
         <>
@@ -134,6 +142,8 @@ export default function PersonDetail(props)
                     {updating &&updatableCard}
                     <br/><br/>
                     <NewDocumentForm insert={addDocument} />
+                    <h1>{varGlob}</h1>
+                    <input type="text" value={varGlob} onChange={modifyVarGlob} />
                 </div>
                 <div className="col-8 bg-light pt-4">
                    <div className="row">
