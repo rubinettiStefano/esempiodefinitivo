@@ -32,6 +32,7 @@ export default function PersonOverview({id,name,surname,age,deleteMe})
                     <h5 class="card-title">{name} {surname}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Age: {age}</h6>
                     <Link class="btn btn-primary me-4" to={"/persondetail/"+id}>DETTAGLIO</Link>
+                    <Link class="btn btn-primary me-4" to={"/persondetailpren/"+id}>DETTAGLIO con Prenotazioni</Link>
                     <button class="btn btn-danger" onClick={()=> deleteMe(id)} >DELETE </button>
                 </div>
             </div>
